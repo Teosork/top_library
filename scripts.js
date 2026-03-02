@@ -46,6 +46,25 @@ addBookForm.addEventListener('submit', function(event) {
 
     let bookItem = document.createElement('li');
     bookItem.textContent = `${newBook.title} by ${newBook.author}, ${newBook.pages} pages - ${newBook.read ? 'Read' : 'Not Read'}`;
+
+    let deleteButton = document.createElement('button');
+    deleteButton.textContent = 'Delete';
+    deleteButton.addEventListener('click', function() {
+        removeBookFromLibrary(newBook.id);
+        bookList.removeChild(bookItem);
+    });
+    
+    let toggleButton = document.createElement('button');
+    toggleButton.textContent = 'Toggle Read';
+    toggleButton.addEventListener('click', function() {
+        newBook.toggleRead();
+        bookItem.textContent = `${newBook.title} by ${newBook.author}, ${newBook.pages} pages - ${newBook.read ? 'Read' : 'Not Read'}`;
+        bookItem.appendChild(toggleButton);
+        bookItem.appendChild(deleteButton);
+    });
+
+    bookItem.appendChild(toggleButton);
+    bookItem.appendChild(deleteButton);
     bookList.appendChild(bookItem);
     this.reset();
 });
