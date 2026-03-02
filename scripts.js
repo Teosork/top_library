@@ -23,15 +23,51 @@ function addBookToLibrary(book) {
     library.push(book);
 }
 
+const testBook1 = new Book(crypto.randomUUID(), 'The Hobbit', 'J.R.R. Tolkien', 310, true);
+const testBook2 = new Book(crypto.randomUUID(), 'The Lord of the Rings', 'J.R.R. Tolkien', 1178, false);
+const testBook3 = new Book(crypto.randomUUID(), '1984', 'George Orwell', 328, true);
+
+addBookToLibrary(testBook1);
+addBookToLibrary(testBook2);
+addBookToLibrary(testBook3);
+
+const bookList = document.getElementById('bookList');
+const addBookForm = document.getElementById('addBookForm');
+
+library.forEach((book) => {
+    let bookItem = document.createElement('div');
+    bookItem.classList.add('book-item');
+    bookItem.textContent = `${book.title} by ${book.author}, ${book.pages} pages - ${book.read ? 'Read' : 'Not Read'}`;
+
+    let deleteButton = document.createElement('button');
+    deleteButton.classList.add('delete-button');
+    deleteButton.textContent = 'Delete';
+    deleteButton.addEventListener('click', function() {
+        removeBookFromLibrary(book.id);
+        bookList.removeChild(bookItem);
+    });
+    
+    let toggleButton = document.createElement('button');
+    toggleButton.classList.add('toggle-button');
+    toggleButton.textContent = 'Toggle Read';
+    toggleButton.addEventListener('click', function() {
+        book.toggleRead();
+        bookItem.textContent = `${book.title} by ${book.author}, ${book.pages} pages - ${book.read ? 'Read' : 'Not Read'}`;
+        bookItem.appendChild(toggleButton);
+        bookItem.appendChild(deleteButton);
+    });
+
+    bookItem.appendChild(toggleButton);
+    bookItem.appendChild(deleteButton);
+    bookList.appendChild(bookItem);
+});
+
 function removeBookFromLibrary(bookId) {
     const bookIndex = library.findIndex(book => book.id === bookId);
     if (bookIndex > -1) {
         library.splice(bookIndex, 1);
     }
 }
-
-const bookList = document.getElementById('bookList');
-const addBookForm = document.getElementById('addBookForm');
 
 addBookForm.addEventListener('submit', function(event) {
     event.preventDefault();
@@ -44,10 +80,12 @@ addBookForm.addEventListener('submit', function(event) {
     const newBook = new Book(id, title, author, pages, read);
     addBookToLibrary(newBook);
 
-    let bookItem = document.createElement('li');
+    let bookItem = document.createElement('div');
+    bookItem.classList.add('book-item');
     bookItem.textContent = `${newBook.title} by ${newBook.author}, ${newBook.pages} pages - ${newBook.read ? 'Read' : 'Not Read'}`;
 
     let deleteButton = document.createElement('button');
+    deleteButton.classList.add('delete-button');
     deleteButton.textContent = 'Delete';
     deleteButton.addEventListener('click', function() {
         removeBookFromLibrary(newBook.id);
@@ -55,6 +93,7 @@ addBookForm.addEventListener('submit', function(event) {
     });
     
     let toggleButton = document.createElement('button');
+    toggleButton.classList.add('toggle-button');
     toggleButton.textContent = 'Toggle Read';
     toggleButton.addEventListener('click', function() {
         newBook.toggleRead();
