@@ -31,34 +31,60 @@ body {
 }
 
 .add-book {
-    display: grid;
-    grid-template-rows: auto 1fr;
+    display: flex;
     gap: 20px;
     border: #333 solid 1px;
     padding: 20px;
     border-radius: 5px;
+    align-items: center;
 }
 
 .add-book h2 {
     text-align: center;
     color: #333;
+    width: 100%;
+    margin-bottom: 10px;
 }
 
-.add-book input {
+.form-inputs {
+    display: flex;
+    gap: 20px;
+    flex: 1;
+    align-items: center;
+}
+
+.add-book input[type="text"],
+.add-book input[type="number"] {
     padding: 10px;
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 5px;
+    flex: 1;
+}
+
+.read-status {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.read-status label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
 }
 
 .add-book button {
-    padding: 10px;
+    padding: 10px 20px;
     font-size: 1rem;
     background-color: #28a745;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .add-book button:hover {

@@ -14,14 +14,20 @@
         </div>
         <div class="add-book">
             <h2>Add New Book</h2>
-            <form id="addBookForm">
+            <form id="addBookForm" class="form-inputs">
                 <input type="text" id="title" placeholder="Title" required>
                 <input type="text" id="author" placeholder="Author" required>
                 <input type="number" id="pages" placeholder="Pages" required>
-                <input type="radio" id="read" name="readStatus" value="read">
-                <label for="read">Read</label>
-                <input type="radio" id="notRead" name="readStatus" value="notRead">
-                <label for="notRead">Not Read</label>
+                <div class="read-status">
+                    <label for="read">
+                        <input type="radio" id="read" name="readStatus" value="read">
+                        Read
+                    </label>
+                    <label for="notRead">
+                        <input type="radio" id="notRead" name="readStatus" value="notRead">
+                        Not Read
+                    </label>
+                </div>
                 <button type="submit">Add Book</button>
             </form>
         </div>
