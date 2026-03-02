@@ -37,7 +37,12 @@ const addBookForm = document.getElementById('addBookForm');
 library.forEach((book) => {
     let bookItem = document.createElement('div');
     bookItem.classList.add('book-item');
-    bookItem.textContent = `${book.title} by ${book.author}, ${book.pages} pages - ${book.read ? 'Read' : 'Not Read'}`;
+
+    let bookText = document.createElement('span');
+    bookText.textContent = `${book.title} by ${book.author}, ${book.pages} pages - ${book.read ? 'Read' : 'Not Read'}`;
+
+    let buttonContainer = document.createElement('div');
+    buttonContainer.classList.add('button-container');
 
     let deleteButton = document.createElement('button');
     deleteButton.classList.add('delete-button');
@@ -52,13 +57,13 @@ library.forEach((book) => {
     toggleButton.textContent = 'Toggle Read';
     toggleButton.addEventListener('click', function() {
         book.toggleRead();
-        bookItem.textContent = `${book.title} by ${book.author}, ${book.pages} pages - ${book.read ? 'Read' : 'Not Read'}`;
-        bookItem.appendChild(toggleButton);
-        bookItem.appendChild(deleteButton);
+        bookText.textContent = `${book.title} by ${book.author}, ${book.pages} pages - ${book.read ? 'Read' : 'Not Read'}`;
     });
-
-    bookItem.appendChild(toggleButton);
-    bookItem.appendChild(deleteButton);
+    
+    buttonContainer.appendChild(toggleButton);
+    buttonContainer.appendChild(deleteButton);
+    bookItem.appendChild(bookText);
+    bookItem.appendChild(buttonContainer);
     bookList.appendChild(bookItem);
 });
 
@@ -82,7 +87,12 @@ addBookForm.addEventListener('submit', function(event) {
 
     let bookItem = document.createElement('div');
     bookItem.classList.add('book-item');
-    bookItem.textContent = `${newBook.title} by ${newBook.author}, ${newBook.pages} pages - ${newBook.read ? 'Read' : 'Not Read'}`;
+
+    let bookText = document.createElement('span');
+    bookText.textContent = `${newBook.title} by ${newBook.author}, ${newBook.pages} pages - ${newBook.read ? 'Read' : 'Not Read'}`;
+
+    let buttonContainer = document.createElement('div');
+    buttonContainer.classList.add('button-container');
 
     let deleteButton = document.createElement('button');
     deleteButton.classList.add('delete-button');
@@ -97,13 +107,13 @@ addBookForm.addEventListener('submit', function(event) {
     toggleButton.textContent = 'Toggle Read';
     toggleButton.addEventListener('click', function() {
         newBook.toggleRead();
-        bookItem.textContent = `${newBook.title} by ${newBook.author}, ${newBook.pages} pages - ${newBook.read ? 'Read' : 'Not Read'}`;
-        bookItem.appendChild(toggleButton);
-        bookItem.appendChild(deleteButton);
+        bookText.textContent = `${newBook.title} by ${newBook.author}, ${newBook.pages} pages - ${newBook.read ? 'Read' : 'Not Read'}`;
     });
 
-    bookItem.appendChild(toggleButton);
-    bookItem.appendChild(deleteButton);
+    buttonContainer.appendChild(toggleButton);
+    buttonContainer.appendChild(deleteButton);
+    bookItem.appendChild(bookText);
+    bookItem.appendChild(buttonContainer);
     bookList.appendChild(bookItem);
     this.reset();
 });
