@@ -1,23 +1,21 @@
 const library = [];
 
-function Book(id, title, author, pages, read) {
-    if (!new.target) {
-        throw Error('Book must be called with new');
+
+class Book {
+    constructor(id, title, author, pages, read){
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
     }
-    this.id = id;
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
+    bookInfo(){
+        console.log(`${this.id}, ${this.title} by ${this.author}, ${this.pages} - ${this.read ? 'Read' : 'Not Read'}`);
+    }
+    toggleRead(){
+        this.read = !this.read;
+    }
 }
-
-Book.prototype.bookInfo = function() {
-    console.log(`${this.id}, ${this.title} by ${this.author}, ${this.pages} - ${this.read ? 'Read' : 'Not Read'}`);
-};
-
-Book.prototype.toggleRead = function() {
-    this.read = !this.read;
-};
 
 function addBookToLibrary(book) {
     library.push(book);
